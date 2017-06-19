@@ -8,7 +8,9 @@ Online interactive git tutorial: [Try git](https://try.github.io/levels/1/challe
 
 Codecademy git course: <https://www.codecademy.com/learn/learn-git>
 
-Git tutorial --vogella: <http://www.vogella.com/tutorials/Git/article.html#gitdefintion_localrepositories>  
+Git tutorial:
+*   vogella: <http://www.vogella.com/tutorials/Git/article.html#gitdefintion_localrepositories>  
+*   atlassian: <https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud>
 
 Config username and email before commit: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
 
