@@ -10,6 +10,9 @@ Codecademy git course: <https://www.codecademy.com/learn/learn-git>
 
 Git tutorial --vogella: <http://www.vogella.com/tutorials/Git/article.html#gitdefintion_localrepositories>  
 
+Config username and email before commit: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
+
+
 ## Fiddler
 
 Download [Fiddler](http://www.telerik.com/fiddler)
