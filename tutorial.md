@@ -53,13 +53,20 @@ Charles tutorial: <https://www.raywenderlich.com/154244/charles-proxy-tutorial-i
     Design test framework and cases  
     Data driven test case  
 
-### Uniitest
+### Unittest
 
 -   Create python unittest in pycharm
 -   Create run configuration as Python tests --> Uniitests
 -   Select Target as Path and specify a folder if run all tests
 -   Or Select Python if run specific test
--   e.g:<test_file_name>.<test_class_name>.[<test_method>]
+-   e.g:&lt;test_file_name>.&lt;test_class_name>.\[&lt;test_method>]
+-   Unittest supports simple test discovery. In order to be compatible with test discovery, all of the test files must be modules or packages importable from the top-level directory of the project (this means that their filenames must be valid identifiers).
+
+[Improve Your Python: Understanding Unit Testing](https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/)
+
+### pytest
+The `pytest` framework makes it easy to write small tests, yet scales to support complex functional testing for applications and libraries.
+[official website](https://docs.pytest.org/en/latest/)
 
 ## regular expression
 
@@ -67,10 +74,10 @@ Charles tutorial: <https://www.raywenderlich.com/154244/charles-proxy-tutorial-i
 
 ## Linux commands
 
-wget
-rpm
-yum
-systemctl
+-   wget  
+-   rpm  
+-   yum  
+-   systemctl  
 
--   modify firewall setting
--   start stop service
+    -   modify firewall setting
+    -   start stop service
