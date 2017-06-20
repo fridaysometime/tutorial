@@ -50,8 +50,16 @@ Charles tutorial: <https://www.raywenderlich.com/154244/charles-proxy-tutorial-i
 
 ## python Unittest & pytest
 
-Design test framework and cases  
-Data driven test case  
+    Design test framework and cases  
+    Data driven test case  
+
+### Uniitest
+
+-   Create python unittest in pycharm
+-   Create run configuration as Python tests --> Uniitests
+-   Select Target as Path and specify a folder if run all tests
+-   Or Select Python if run specific test
+-   e.g:<test_file_name>.<test_class_name>.[<test_method>]
 
 ## regular expression
 
