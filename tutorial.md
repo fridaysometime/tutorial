@@ -16,6 +16,10 @@ Git tutorial:
 
 Config username and email before commit: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
 
+    $ git config --global user.name "John Doe"
+    $ git config --global user.email johndoe@example.com
+
+
 ## Fiddler
 
 Download [Fiddler](http://www.telerik.com/fiddler)
@@ -61,6 +65,9 @@ Charles tutorial: <https://www.raywenderlich.com/154244/charles-proxy-tutorial-i
 -   Or Select Python if run specific test
 -   e.g:&lt;test_file_name>.&lt;test_class_name>.\[&lt;test_method>]
 -   Unittest supports simple test discovery. In order to be compatible with test discovery, all of the test files must be modules or packages importable from the top-level directory of the project (this means that their filenames must be valid identifiers).
+- Run unittest:
+
+      python -m unittest discover
 
 [Improve Your Python: Understanding Unit Testing](https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/)
 
