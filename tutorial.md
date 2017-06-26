@@ -92,8 +92,72 @@ print dict(params)
 ## Python OOP
 [Improve Your Python: Python Classes and Object Oriented Programming](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
 
-### inheritance, super
-TODO:
+### Inheritance
+
+What's the difference?
+> `SomeBaseClass.__init__(self)`
+
+means to call SomeBaseClass's `__init__`. while
+
+> `super(Child, self).__init__()` or `super(self.__class__,self).__init__()`
+
+means to call a bound `__init__` from the parent class that follows Child in the instance's method resolution order.
+
+
+```python
+class Person(object):
+    def __init__(self, name):
+        self.name = name
+        self.age = 18
+
+    def print_bio(self):
+        print "bio..."
+        for k, v in vars(self).iteritems():
+            print "{}: {}".format(k, v)
+
+
+class Customer(Person):
+    def __init__(self, name, rank):
+        # call super __init__() before self __init__()
+        super(Customer, self).__init__(name)
+        # super(self.__class__, self).__init__(name)
+        self.rank = rank
+
+
+class Staff(Person):
+    def __init__(self):
+        name = 'new staff'
+        Person.__init__(self, name) # call base class __init__() method
+        self.staff_no = 10086
+
+    def print_bio(self):
+        # override base class method
+        print "override super method, print bio:"
+        print "staff no: ", self.staff_no
+        print "staff name: ", self.name
+
+
+def print_person_bio(*persons):
+    for p in persons:
+        p.print_bio()
+        print "-" * 20
+
+
+if __name__ == '__main__':
+    person = Person('person1')
+    customer = Customer('vip customer', 9)
+    staff = Staff()
+
+    person.print_bio()
+    print "-" * 20
+    customer.print_bio()
+    print "-" * 20
+    staff.print_bio()
+
+
+    # polymorphism
+    # print_person_bio(person,customer,staff)
+```
 ### module, packages
 
 ```python
@@ -104,6 +168,55 @@ if __name__ == '__main__':
 ### @staticmethod, @classmethod, instance method (self)  
 
 [The definitive guide on how to use static, class or abstract methods in Python](https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods)
+
+[why self? & \__init__() is not a constructor](https://www.programiz.com/article/python-self-why)
+
+@classmethod: used as overloading constraction methods
+@staticmethod: for better organization within class
+```python
+class Date(object):
+    def __init__(self, day=0, month=0, year=0):
+        self.day = day
+        self.month = month
+        self.year = year
+
+    def display_date(self):
+        print "{}/{}/{}".format(self.month, self.day, self.year)
+
+    @classmethod
+    def from_string(cls, date_as_string):
+        """
+        as a factory method to instantiate Date instance  
+
+        :param date_as_string: 'dd-MM-yyyy'
+        :return: Date instance
+        """
+        day, month, year = map(int, date_as_string.split('-'))
+        return cls(day, month, year)
+
+    @staticmethod
+    def is_valid_date(date_string):
+        day, month, year = map(int, date_string.split('-'))
+        return day <= 31 and month <= 12 and year <= 3999
+
+
+if __name__ == '__main__':
+    class_attr = set(dir(Date))
+
+    date_str1 = '6-26-2017'
+    date_str2 = '16-26-2017'
+    print Date.is_valid_date(date_str2)
+    date1 = Date.from_string(date_str1)
+
+    # print dir(date1)
+    for attr in [x for x in dir(date1) if not x.startswith('__')]:
+        print "attribute: {}-->{}, if callable: {}".format(attr, getattr(date1, attr), callable(getattr(date1, attr)))
+
+    # only date attributes
+    print date1.__dict__
+    for k, v in date1.__dict__.items():
+        print k, getattr(date1, k)
+```
 
 ### Data Hiding
 ```python
