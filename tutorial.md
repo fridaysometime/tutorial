@@ -65,8 +65,9 @@ Charles tutorial: <https://www.raywenderlich.com/154244/charles-proxy-tutorial-i
 -   e.g:&lt;test_file_name>.&lt;test_class_name>.\[&lt;test_method>]
 -   Unittest supports simple test discovery. In order to be compatible with test discovery, all of the test files must be modules or packages importable from the top-level directory of the project (this means that their filenames must be valid identifiers).
 -   Run unittest:  
-        python -m unittest discover
-
+    ```python
+    python -m unittest discover
+    ```
 
 -   [Improve Your Python: Understanding Unit Testing](https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/)
 
@@ -88,13 +89,11 @@ print query
 print dict(params)
 ```
 
-## python OOP
+## Python OOP
+[Improve Your Python: Python Classes and Object Oriented Programming](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
 
-oop <https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/>
-class inheritance
-
-### self
-
+### inheritance, super
+TODO:
 ### module, packages
 
 ```python
@@ -102,7 +101,9 @@ if __name__ == '__main__':
   main()
 ```
 
-### @staticmethod, @classmethod, instance method
+### @staticmethod, @classmethod, instance method (self)  
+
+[The definitive guide on how to use static, class or abstract methods in Python](https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods)
 
 ### Data Hiding
 ```python
@@ -131,8 +132,8 @@ class BankAccount(object):
             raise Exception("Not enough money!")
 
     def transfer(self):
-    # implement this method
-    pass
+        # implement this method
+        pass
 
 
 if __name__ == '__main__':
