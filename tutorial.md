@@ -64,11 +64,11 @@ Charles tutorial: <https://www.raywenderlich.com/154244/charles-proxy-tutorial-i
 -   Or Select Python if run specific test
 -   e.g:&lt;test_file_name>.&lt;test_class_name>.\[&lt;test_method>]
 -   Unittest supports simple test discovery. In order to be compatible with test discovery, all of the test files must be modules or packages importable from the top-level directory of the project (this means that their filenames must be valid identifiers).
--   Run unittest:
+-   Run unittest:  
+        python -m unittest discover
 
-      python -m unittest discover
 
-[Improve Your Python: Understanding Unit Testing](https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/)
+-   [Improve Your Python: Understanding Unit Testing](https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/)
 
 ### pytest
 
@@ -78,6 +78,7 @@ The `pytest` framework makes it easy to write small tests, yet scales to support
 ## URL RESTful
 
 parse URL:  
+
 ```python
 from urlparse import urlsplit, parse_qsl
 url = "http://www.example.org/default.html?user=admin&password=Bdclab123"
@@ -87,15 +88,76 @@ print query
 print dict(params)
 ```
 
-## python
+## python OOP
+
 oop <https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/>
 class inheritance
-module, packages
-cls, @classmethod
+
+### self
+
+### module, packages
+
+```python
+if __name__ == '__main__':
+  main()
+```
+
+### @staticmethod, @classmethod, instance method
+
+### Data Hiding
+```python
+class BankAccount(object):
+    __class_hiding_member = "I'm now hiding"
+    total = 0
+
+    def __init__(self):
+        self.__amount = 0  # keep accessing from outside class
+        self.sn = '0000-0000-0000'
+
+    def deposit(self, money):
+        # can access a hiding member within it's own class
+        # provide getter, setter methods to interact hiding member from outside
+        self.__amount += money
+
+    def balance(self):
+        return self.__amount
+
+    def withdraw(self, money):
+        # TODO: there might be a potential logic issue here try to fix it
+        if self.balance() >= money:
+            self.__amount -= money
+            return money
+        else:
+            raise Exception("Not enough money!")
 
 
+if __name__ == '__main__':
+    acc1 = BankAccount()
+    acc1.sn = '1234-5678-6666'
+    print acc1.__amount
+    acc1.__amount = 9999
+    print "default balance: ", acc1.balance()
+    acc1.deposit(100)
+    print "deposit 100: ", "balance: ", acc1.balance()
 
-## regular expression
+    try:
+        print "withdraw: ", acc1.withdraw(80), "balance: ", acc1.balance()
+        print "withdraw: ", acc1.withdraw(15), "balance: ", acc1.balance()
+        print "withdraw: ", acc1.withdraw(5), "balance: ", acc1.balance()
+        print "withdraw: ", acc1.withdraw(-100), "balance: ", acc1.balance()
+    except Exception as ex:
+        print "[reason]", ex.message, "balance: ", acc1.balance()
+
+    # can still access hiding member with vars()
+    # print vars(acc1)
+    # print vars(BankAccount)
+    #
+    # print acc1._DataHiding__amount
+    # print acc1._DataHiding__class_hiding_member
+```
+
+
+## Regular expression
 
 ## Jekins
 
