@@ -103,6 +103,7 @@ means to call SomeBaseClass's `__init__`. while
 
 means to call a bound `__init__` from the parent class that follows Child in the instance's method resolution order.
 
+source code [link](/src/inheritance.py)
 
 ```python
 class Person(object):
