@@ -130,6 +130,10 @@ class BankAccount(object):
         else:
             raise Exception("Not enough money!")
 
+    def transfer(self):
+    # implement this method
+    pass
+
 
 if __name__ == '__main__':
     acc1 = BankAccount()
