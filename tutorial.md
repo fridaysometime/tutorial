@@ -65,6 +65,7 @@ Charles tutorial: <https://www.raywenderlich.com/154244/charles-proxy-tutorial-i
 -   e.g:&lt;test_file_name>.&lt;test_class_name>.\[&lt;test_method>]
 -   Unittest supports simple test discovery. In order to be compatible with test discovery, all of the test files must be modules or packages importable from the top-level directory of the project (this means that their filenames must be valid identifiers).
 -   Run unittest:  
+
     ```python
     python -m unittest discover
     ```
@@ -90,11 +91,13 @@ print dict(params)
 ```
 
 ## Python OOP
+
 [Improve Your Python: Python Classes and Object Oriented Programming](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
 
 ### Inheritance
 
 What's the difference?
+
 > `SomeBaseClass.__init__(self)`
 
 means to call SomeBaseClass's `__init__`. while
@@ -103,62 +106,8 @@ means to call SomeBaseClass's `__init__`. while
 
 means to call a bound `__init__` from the parent class that follows Child in the instance's method resolution order.
 
-source code [link](/src/inheritance.py)
+[sample code link](/src/inheritance.py)
 
-```python
-class Person(object):
-    def __init__(self, name):
-        self.name = name
-        self.age = 18
-
-    def print_bio(self):
-        print "bio..."
-        for k, v in vars(self).iteritems():
-            print "{}: {}".format(k, v)
-
-
-class Customer(Person):
-    def __init__(self, name, rank):
-        # call super __init__() before self __init__()
-        super(Customer, self).__init__(name)
-        # super(self.__class__, self).__init__(name)
-        self.rank = rank
-
-
-class Staff(Person):
-    def __init__(self):
-        name = 'new staff'
-        Person.__init__(self, name) # call base class __init__() method
-        self.staff_no = 10086
-
-    def print_bio(self):
-        # override base class method
-        print "override super method, print bio:"
-        print "staff no: ", self.staff_no
-        print "staff name: ", self.name
-
-
-def print_person_bio(*persons):
-    for p in persons:
-        p.print_bio()
-        print "-" * 20
-
-
-if __name__ == '__main__':
-    person = Person('person1')
-    customer = Customer('vip customer', 9)
-    staff = Staff()
-
-    person.print_bio()
-    print "-" * 20
-    customer.print_bio()
-    print "-" * 20
-    staff.print_bio()
-
-
-    # polymorphism
-    # print_person_bio(person,customer,staff)
-```
 ### module, packages
 
 ```python
@@ -166,115 +115,20 @@ if __name__ == '__main__':
   main()
 ```
 
-### @staticmethod, @classmethod, instance method (self)  
+### @staticmethod, @classmethod, instance method (self)
 
 [The definitive guide on how to use static, class or abstract methods in Python](https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods)
 
-[why self? & \__init__() is not a constructor](https://www.programiz.com/article/python-self-why)
+[why self? & \_\_init\_\_() is not a constructor](https://www.programiz.com/article/python-self-why)
 
 @classmethod: used as overloading constraction methods
 @staticmethod: for better organization within class
-```python
-class Date(object):
-    def __init__(self, day=0, month=0, year=0):
-        self.day = day
-        self.month = month
-        self.year = year
 
-    def display_date(self):
-        print "{}/{}/{}".format(self.month, self.day, self.year)
-
-    @classmethod
-    def from_string(cls, date_as_string):
-        """
-        as a factory method to instantiate Date instance  
-
-        :param date_as_string: 'dd-MM-yyyy'
-        :return: Date instance
-        """
-        day, month, year = map(int, date_as_string.split('-'))
-        return cls(day, month, year)
-
-    @staticmethod
-    def is_valid_date(date_string):
-        day, month, year = map(int, date_string.split('-'))
-        return day <= 31 and month <= 12 and year <= 3999
-
-
-if __name__ == '__main__':
-    class_attr = set(dir(Date))
-
-    date_str1 = '6-26-2017'
-    date_str2 = '16-26-2017'
-    print Date.is_valid_date(date_str2)
-    date1 = Date.from_string(date_str1)
-
-    # print dir(date1)
-    for attr in [x for x in dir(date1) if not x.startswith('__')]:
-        print "attribute: {}-->{}, if callable: {}".format(attr, getattr(date1, attr), callable(getattr(date1, attr)))
-
-    # only date attributes
-    print date1.__dict__
-    for k, v in date1.__dict__.items():
-        print k, getattr(date1, k)
-```
+[sample code link](/src/class_method.py)
 
 ### Data Hiding
-```python
-class BankAccount(object):
-    __class_hiding_member = "I'm now hiding"
-    total = 0
 
-    def __init__(self):
-        self.__amount = 0  # keep accessing from outside class
-        self.sn = '0000-0000-0000'
-
-    def deposit(self, money):
-        # can access a hiding member within it's own class
-        # provide getter, setter methods to interact hiding member from outside
-        self.__amount += money
-
-    def balance(self):
-        return self.__amount
-
-    def withdraw(self, money):
-        # TODO: there might be a potential logic issue here try to fix it
-        if self.balance() >= money:
-            self.__amount -= money
-            return money
-        else:
-            raise Exception("Not enough money!")
-
-    def transfer(self):
-        # implement this method
-        pass
-
-
-if __name__ == '__main__':
-    acc1 = BankAccount()
-    acc1.sn = '1234-5678-6666'
-    print acc1.__amount
-    acc1.__amount = 9999
-    print "default balance: ", acc1.balance()
-    acc1.deposit(100)
-    print "deposit 100: ", "balance: ", acc1.balance()
-
-    try:
-        print "withdraw: ", acc1.withdraw(80), "balance: ", acc1.balance()
-        print "withdraw: ", acc1.withdraw(15), "balance: ", acc1.balance()
-        print "withdraw: ", acc1.withdraw(5), "balance: ", acc1.balance()
-        print "withdraw: ", acc1.withdraw(-100), "balance: ", acc1.balance()
-    except Exception as ex:
-        print "[reason]", ex.message, "balance: ", acc1.balance()
-
-    # can still access hiding member with vars()
-    # print vars(acc1)
-    # print vars(BankAccount)
-    #
-    # print acc1._DataHiding__amount
-    # print acc1._DataHiding__class_hiding_member
-```
-
+[sample code link](/src/BankAccount.py)
 
 ## Regular expression
 
